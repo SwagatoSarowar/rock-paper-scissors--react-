@@ -1,3 +1,7 @@
+# Project description
+This is a simple rock-paper-scissors game with react and typescript just to play around and learn useReducer hook.
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
