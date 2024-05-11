@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  font-family: "Press Start 2P", system-ui;
+  background-color: #323333;
+}
+
+.text-shadow {
+  text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.left-image {
+  animation: rpsl 3s linear;
+  -webkit-animation: rpsl 3s linear;
+}
+
+.right-image {
+  animation: rpsr 3s linear;
+  -webkit-animation: rpsr 3s linear;
+}
+
+@keyframes rpsl {
+  0% {
+    rotate: 0deg;
+  }
+  10% {
+    rotate: 10deg;
+  }
+  30% {
+    rotate: -10deg;
+  }
+  50% {
+    rotate: 10deg;
+  }
+  70% {
+    rotate: -10deg;
+  }
+  90% {
+    rotate: 10deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+
+@keyframes rpsr {
+  0% {
+    rotate: 0deg;
+  }
+  10% {
+    rotate: -10deg;
+  }
+  30% {
+    rotate: 10deg;
+  }
+  50% {
+    rotate: -10deg;
+  }
+  70% {
+    rotate: 10deg;
+  }
+  90% {
+    rotate: -10deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
