@@ -1,12 +1,21 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import Container from "./components/Container";
 import CustomError from "./components/Error";
 import GameField from "./components/GameField";
+import InitialUI from "./components/InitialUI";
 import Loader from "./components/Loader";
 import Result from "./components/Result";
 
 interface InitialStateI {
-  status: "loading" | "ready" | "active" | "end" | "result" | "error";
+  status:
+    | "initial"
+    | "loading"
+    | "ready"
+    | "active"
+    | "end"
+    | "result"
+    | "error";
+  playerName: string;
   playerIndex: { computer: number; player: number };
   winner: "player" | "computer" | "draw";
 }
@@ -18,7 +27,8 @@ interface ActionI {
 }
 
 const initialState: InitialStateI = {
-  status: "ready",
+  status: "loading",
+  playerName: "",
   playerIndex: {
     computer: 0,
     player: 0,
@@ -30,6 +40,8 @@ const reducer = function (curState: InitialStateI, action: ActionI) {
   switch (action.type) {
     case "setStatus":
       return { ...curState, status: action.payload };
+    case "setPlayerName":
+      return { ...curState, playerName: action.payload };
     case "setPlayersIndex":
       return { ...curState, playerIndex: action.payload };
     case "setWinner":
@@ -41,7 +53,13 @@ const reducer = function (curState: InitialStateI, action: ActionI) {
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { status, playerIndex, winner } = state;
+  const { status, playerName, playerIndex, winner } = state;
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch({ type: "setStatus", payload: "initial" });
+    }, 2000);
+  }, []);
   return (
     <>
       <div className="h-screen overflow-y-hidden flex flex-col gap-y-20">
@@ -56,6 +74,9 @@ export default function App() {
               <Result winner={winner} dispatch={dispatch} />
             )}
             <div className="h-full">
+              {status === "initial" && (
+                <InitialUI dispatch={dispatch} playerName={playerName} />
+              )}
               {status === "loading" && <Loader />}
               {(status === "ready" ||
                 status === "active" ||
@@ -64,6 +85,7 @@ export default function App() {
                 <GameField
                   status={status}
                   dispatch={dispatch}
+                  playerName={playerName}
                   playerIndex={playerIndex}
                 />
               )}

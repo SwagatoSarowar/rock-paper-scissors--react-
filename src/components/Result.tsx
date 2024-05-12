@@ -1,5 +1,6 @@
 interface ResultProps {
   winner: "player" | "computer" | "draw";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: any;
 }
 
