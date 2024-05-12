@@ -8,7 +8,9 @@ import scissorsImgRight from "../assets/scissors-right.png";
 
 interface GameFieldProps {
   status: "ready" | "active" | "end" | "result";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dispatch: any;
+  playerName: string;
   playerIndex: { computer: number; player: number };
 }
 
@@ -18,6 +20,7 @@ const playerSideImages = [rockImgLeft, paperImgLeft, scissorsImgLeft];
 export default function GameField({
   status,
   dispatch,
+  playerName,
   playerIndex,
 }: GameFieldProps) {
   const handleHit = function () {
@@ -64,7 +67,7 @@ export default function GameField({
       (player === 2 && computer === 1) ||
       (player === 0 && computer === 2)
     ) {
-      dispatch({ type: "setWinner", payload: "player" });
+      dispatch({ type: "setWinner", payload: playerName });
     } else {
       dispatch({ type: "setWinner", payload: "draw" });
     }
@@ -73,7 +76,7 @@ export default function GameField({
     <div className="h-full flex flex-col gap-y-6 items-center">
       <div className="flex [&>*]:flex-grow flex-grow self-stretch text-2xl">
         <div className="text-center flex-grow border-r border-white/25 gap-8 flex flex-col items-center">
-          <h2 className="text-[#1B65EE]">Player</h2>
+          <h2 className="text-[#1B65EE]">{playerName}</h2>
           {status === "active" && (
             <img className="left-image w-[300px]" src={rockImgLeft} alt="" />
           )}
