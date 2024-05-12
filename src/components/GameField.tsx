@@ -1,3 +1,4 @@
+import { Blocks } from "react-loader-spinner";
 import paperImgLeft from "../assets/paper-left.png";
 import paperImgRight from "../assets/paper-right.png";
 import rockImgLeft from "../assets/rock-left.png";
@@ -20,6 +21,8 @@ export default function GameField({
   playerIndex,
 }: GameFieldProps) {
   const handleHit = function () {
+    if (status !== "ready") return;
+
     const computer = Math.trunc(Math.random() * 3);
     const player = Math.trunc(Math.random() * 3);
 
@@ -72,10 +75,10 @@ export default function GameField({
         <div className="text-center flex-grow border-r border-white/25 gap-8 flex flex-col items-center">
           <h2 className="text-[#1B65EE]">Player</h2>
           {status === "active" && (
-            <img className="left-image w-[450px]" src={rockImgLeft} alt="" />
+            <img className="left-image w-[300px]" src={rockImgLeft} alt="" />
           )}
           <img
-            className="w-[450px]"
+            className="w-[300px]"
             src={
               status === "ready" || status === "result"
                 ? rockImgLeft
@@ -89,10 +92,10 @@ export default function GameField({
         <div className="text-center flex-grow border-l border-white/25 gap-8 flex flex-col items-center">
           <h2 className="text-[#F03838]">Computer</h2>
           {status === "active" && (
-            <img className="right-image w-[450px]" src={rockImgRight} alt="" />
+            <img className="right-image w-[300px]" src={rockImgRight} alt="" />
           )}
           <img
-            className="w-[450px]"
+            className="w-[300px]"
             src={
               status === "ready" || status === "result"
                 ? rockImgRight
@@ -104,12 +107,28 @@ export default function GameField({
           />
         </div>
       </div>
-      <button
-        onClick={handleHit}
-        className="mb-16 border-2 px-16 py-6 w-fit text-3xl rounded-full border-white/20 hover:border-white/50 duration-300"
-      >
-        HIT
-      </button>
+
+      {status === "active" ? (
+        <div className="h-[142px] mb-16">
+          <Blocks
+            height="80"
+            width="80"
+            color="#fff"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            visible={true}
+          />
+        </div>
+      ) : (
+        <button
+          disabled={status !== "ready"}
+          onClick={handleHit}
+          className="mb-16 border-2 px-16 py-6 w-fit text-3xl rounded-full border-white/20 hover:border-white/50 duration-300"
+        >
+          HIT
+        </button>
+      )}
     </div>
   );
 }

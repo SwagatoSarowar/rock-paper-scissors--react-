@@ -44,7 +44,7 @@ export default function App() {
   const { status, playerIndex, winner } = state;
   return (
     <>
-      <div className="h-[100vh] flex flex-col gap-y-20">
+      <div className="h-screen overflow-y-hidden flex flex-col gap-y-20">
         <Container>
           <h1 className="text-center text-6xl text-lime-500 mt-10">
             Lets play ✊ 📃 ✂️
@@ -55,7 +55,7 @@ export default function App() {
             {status === "result" && (
               <Result winner={winner} dispatch={dispatch} />
             )}
-            <div className="w-full h-full">
+            <div className="h-full">
               {status === "loading" && <Loader />}
               {(status === "ready" ||
                 status === "active" ||
