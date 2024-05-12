@@ -80,9 +80,9 @@ export default function GameField({
           <img
             className="w-[300px]"
             src={
-              status === "ready" || status === "result"
+              status === "ready"
                 ? rockImgLeft
-                : status === "end"
+                : status === "end" || status === "result"
                 ? playerSideImages[playerIndex.player]
                 : ""
             }
@@ -97,9 +97,9 @@ export default function GameField({
           <img
             className="w-[300px]"
             src={
-              status === "ready" || status === "result"
+              status === "ready"
                 ? rockImgRight
-                : status === "end"
+                : status === "end" || status === "result"
                 ? computerSideImages[playerIndex.computer]
                 : ""
             }
